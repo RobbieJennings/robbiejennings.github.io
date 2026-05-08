@@ -16,7 +16,7 @@ showPagination = false
     alt="New Orleans"
     caption="New Orleans"
     nozoom="true"
-    href="/posts/new-orleans.md/"
+    href="/posts/new-orleans/"
   >}}
 
   {{<figure 
