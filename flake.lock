@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "nix-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778340217,
+        "narHash": "sha256-eTpWg2myUKvTR6PfHuu6MpqbG/lUMWQvD3qSeTLhxRk=",
+        "owner": "robbiejennings",
+        "repo": "nix-config",
+        "rev": "032d5a2af9b5bb318890fb6dca22c6a7e2fa2254",
+        "type": "github"
+      },
+      "original": {
+        "owner": "robbiejennings",
+        "repo": "nix-config",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1777954456,
@@ -35,6 +51,7 @@
     "root": {
       "inputs": {
         "blowfish": "blowfish",
+        "nix-config": "nix-config",
         "nixpkgs": "nixpkgs"
       }
     }

@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-config = {
+      url = "github:robbiejennings/nix-config";
+      flake = false;
+    };
     blowfish = {
       url = "github:nunocoracao/blowfish";
       flake = false;
@@ -10,7 +14,7 @@
   };
 
   outputs =
-    { self, nixpkgs, blowfish }:
+    { self, nixpkgs, nix-config, blowfish }:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
         "x86_64-linux"
@@ -29,7 +33,9 @@
           dontConfigure = true;
           buildPhase = ''
             mkdir -p themes/blowfish
-            cp -r ${blowfish}/* themes/blowfish/
+            mkdir -p assets/code/nix-config
+            cp -r --no-preserve=mode ${blowfish}/* themes/blowfish
+            cp -r --no-preserve=mode ${nix-config}/* assets/code/nix-config
             ${pkgs.${system}.hugo}/bin/hugo
           '';
           installPhase = "cp -r public $out";
@@ -59,8 +65,12 @@
             git
           ];
           shellHook = ''
+            rm -rf themes/blowfish
+            rm -rf assets/code/nix-config
             mkdir -p themes/blowfish
-            cp -r ${blowfish}/* themes/blowfish/
+            mkdir -p assets/code/nix-config
+            cp -r --no-preserve=mode ${blowfish}/* themes/blowfish
+            cp -r --no-preserve=mode ${nix-config}/* assets/code/nix-config
             hugo server
           '';
         };

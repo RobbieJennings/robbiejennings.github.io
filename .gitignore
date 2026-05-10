@@ -1,5 +1,6 @@
-result
+assets/code/
 themes/
 public/
+result/
 /resources/_gen/
 .hugo_build.lock

@@ -43,37 +43,24 @@ A single module can be defined for re-used nix and home-manager settings to redu
 
 ## Defining a feature module
 Though modules are composable, each module file should handle a single repsonsibility. For example, a desktop module may contain many individual feature modules to cover the desktop environments, audio interfaces, etc...\
+
 ### Single feature
 An "audio" module may look like:
-{{< codeimporter
-  url="https://raw.githubusercontent.com/robbiejennings/nix-config/main/modules/desktop/audio.nix"
-  type="nix"
->}}
+{{< codefile file="assets/code/nix-config/modules/desktop/audio.nix" lang="nix" >}}
+
 ### Multi-feature
 This may be imported into a high-level "desktop" module like:
-{{< codeimporter
-  url="https://raw.githubusercontent.com/robbiejennings/nix-config/main/modules/desktop/default.nix"
-  type="nix"
->}}
+{{< codefile file="assets/code/nix-config/modules/desktop/default.nix" lang="nix" >}}
 
 ## The factory method
 Adding a named "factory" flake module with an unspecified attribute list as its type will allow for the creation of factory modules. These modules look similar to typical nixos or home-manager modules with the exception that they take an addtional attribute set as the initial argument and can then be re-used to instantiate multiple modules using the same logic.
 
 The factory module should look like:
-{{< codeimporter
-  url="https://raw.githubusercontent.com/robbiejennings/nix-config/main/modules/nix/factory.nix"
-  type="nix"
->}}
+{{< codefile file="assets/code/nix-config/modules/nix/factory.nix" lang="nix" >}}
 
 This flake module can then be used to instantiate a desktop-user nixos module like:
-{{< codeimporter
-  url="https://raw.githubusercontent.com/robbiejennings/nix-config/main/modules/users/desktop-user.nix"
-  type="nix"
->}}
+{{< codefile file="assets/code/nix-config/modules/users/desktop-user.nix" lang="nix" >}}
 
 ## Creating a system configuration
 Bringing everything together, we can create a complete NixOS system configuration using the flake.nixosConfigurations.\<hostname> function. A laptop system module may look like:
-{{< codeimporter
-  url="https://raw.githubusercontent.com/robbiejennings/nix-config/main/modules/systems/laptop.nix"
-  type="nix"
->}}
+{{< codefile file="assets/code/nix-config/modules/systems/laptop.nix" lang="nix" >}}

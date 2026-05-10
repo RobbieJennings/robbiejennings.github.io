@@ -1,0 +1,27 @@
+{{ $file := .Get "file" }}
+{{ $type := .Get "type" }}
+{{ $startLine := .Get "startLine" | default 1 | int }}
+{{ $startLine = sub $startLine 1 }}
+{{ $endLine := .Get "endLine" | default -1 | int }}
+{{ $selectedLines := slice }}
+{{ with readFile $file }}
+  {{ $lines := split . "\n" }}
+  {{ $totalLine := len $lines }}
+
+  {{ if ne $endLine -1 }}
+    {{ $endLine = math.Min $endLine $totalLine }}
+  {{ else }}
+    {{ $endLine = $totalLine }}
+  {{ end }}
+
+  {{ if gt $startLine $endLine }}
+    {{ errorf "codefile shortcode: startLine is greater than endLine: %s" $file }}
+  {{ end }}
+
+  {{ $selectedLines := first $endLine $lines }}
+  {{ $selectedLines = after $startLine $selectedLines }}
+  {{ $codeBlock := printf "```%s\n%s\n```" $type (delimit $selectedLines "\n") }}
+  {{ $codeBlock | markdownify }}
+{{ else }}
+  {{ warnf "codefile shortcode: unable to read %q: %s" $file .Position }}
+{{ end }}
