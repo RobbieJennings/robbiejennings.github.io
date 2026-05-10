@@ -36,10 +36,7 @@ A simple flake to create a nixos-configuration with modules defined in the *modu
 
 ## Defining a module for basic settings
 A single module can be defined for re-used nix and home-manager settings to reduce code duplication across configurations:
-{{< codeimporter
-  url="https://raw.githubusercontent.com/robbiejennings/nix-config/main/modules/nix/settings.nix"
-  type="nix"
->}}
+{{< codefile file="assets/code/nix-config/main/modules/nix/settings.nix" lang="nix" >}}
 
 ## Defining a feature module
 Though modules are composable, each module file should handle a single repsonsibility. For example, a desktop module may contain many individual feature modules to cover the desktop environments, audio interfaces, etc...\
