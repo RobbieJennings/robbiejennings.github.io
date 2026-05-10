@@ -17,13 +17,13 @@
 [[main]]
   name = "NixOS"
   parent = "Docs"
-  pageRef = "docs/nixos/introduction"
+  pageRef = "docs/nixos/01-introduction"
   weight = 10
 
 [[main]]
   name = "Kubernetes"
   parent = "Docs"
-  pageRef = "docs/kubernetes/introduction"
+  pageRef = "docs/kubernetes/01-introduction"
   weight = 20
 
 [[main]]
