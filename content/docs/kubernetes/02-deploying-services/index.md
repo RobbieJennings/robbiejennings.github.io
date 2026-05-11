@@ -146,7 +146,7 @@ To install a service using raw manifests on NixOS we can use the *services.k3s.m
   ...
 }:
 {
-  flake.modules.nixos.metallb =
+  flake.modules.nixos.transmission =
     {
       config,
       lib,
@@ -154,77 +154,200 @@ To install a service using raw manifests on NixOS we can use the *services.k3s.m
       ...
     }:
     let
-      chart = {
-        name = "metallb";
-        repo = "https://metallb.github.io/metallb";
-        version = "0.15.2";
-        hash = "sha256-Tw/DE82XgZoceP/wo4nf4cn5i8SQ8z9SExdHXfHXuHM=";
-      };
-      controllerImage = pkgs.dockerTools.pullImage {
-        imageName = "quay.io/metallb/controller";
-        imageDigest = "sha256:417cdb6d6f9f2c410cceb84047d3a4da3bfb78b5ddfa30f4cf35ea5c667e8c2e";
-        sha256 = "sha256-AzOCFyOAeLsFw7ESAg8iYygzH4ygxgNQcJ5rpajbnio=";
-        finalImageTag = "v0.15.2";
-        arch = "amd64";
-      };
-      speakerImage = pkgs.dockerTools.pullImage {
-        imageName = "quay.io/metallb/speaker";
-        imageDigest = "sha256:260c9406f957c0830d4e6cd2e9ac8c05e51ac959dd2462c4c2269ac43076665a";
-        sha256 = "sha256-gdy9zFJjY9wTYKuF7j5NW16V6oPWdFwEji+Nvt5Qr7Y=";
-        finalImageTag = "v0.15.2";
+      image = pkgs.dockerTools.pullImage {
+        imageName = "linuxserver/transmission";
+        imageDigest = "sha256:978b9e0b06eda2cfed79c861fc8ca440b8b29e45dc9dc2522daa67c3818a0d88";
+        sha256 = "sha256-uQWuUyhumbEmxTgYzhWtLjg6z+67qQqlRZ2W134ZHbA=";
+        finalImageTag = "4.0.6";
         arch = "amd64";
       };
     in
     {
       options = {
-        metallb.enable = lib.mkEnableOption "metalLB helm chart on k3s";
+        media-server.transmission.enable = lib.mkEnableOption "transmission manifest on k3s";
       };
 
-      config = lib.mkIf config.metallb.enable {
+      config = lib.mkIf (config.media-server.enable && config.media-server.transmission.enable) {
         services.k3s = {
-          images = [
-            controllerImage
-            speakerImage
+          images = [ image ];
+          manifests.transmission.content = [
+            {
+              apiVersion = "v1";
+              kind = "PersistentVolumeClaim";
+              metadata = {
+                name = "transmission-config";
+                namespace = "media";
+              };
+              spec = {
+                accessModes = [ "ReadWriteOnce" ];
+                storageClassName = "longhorn";
+                resources.requests.storage = "5Gi";
+              };
+            }
+            {
+              apiVersion = "v1";
+              kind = "PersistentVolumeClaim";
+              metadata = {
+                name = "transmission-watch";
+                namespace = "media";
+              };
+              spec = {
+                accessModes = [ "ReadWriteOnce" ];
+                storageClassName = "longhorn";
+                resources.requests.storage = "5Gi";
+              };
+            }
+            {
+              apiVersion = "apps/v1";
+              kind = "Deployment";
+              metadata = {
+                name = "transmission";
+                namespace = "media";
+              };
+              spec = {
+                replicas = 1;
+                selector.matchLabels.app = "transmission";
+                template = {
+                  metadata.labels.app = "transmission";
+                  spec = {
+                    containers = [
+                      {
+                        name = "transmission";
+                        image = "${image.imageName}:${image.imageTag}";
+                        ports = [
+                          { containerPort = 9091; }
+                          {
+                            containerPort = 51413;
+                            protocol = "TCP";
+                          }
+                          {
+                            containerPort = 51413;
+                            protocol = "UDP";
+                          }
+                        ];
+                        env = [
+                          {
+                            name = "PUID";
+                            value = "1000";
+                          }
+                          {
+                            name = "PGID";
+                            value = "1000";
+                          }
+                        ];
+                        resources = {
+                          requests.cpu = "50m";
+                          requests.memory = "128Mi";
+                          limits.cpu = "300m";
+                          limits.memory = "256Mi";
+                        };
+                        startupProbe = {
+                          httpGet = {
+                            path = "/transmission/web/";
+                            port = 9091;
+                          };
+                          failureThreshold = 30;
+                          periodSeconds = 5;
+                        };
+                        readinessProbe = {
+                          httpGet = {
+                            path = "/transmission/web/";
+                            port = 9091;
+                          };
+                          initialDelaySeconds = 15;
+                          periodSeconds = 10;
+                          timeoutSeconds = 2;
+                          failureThreshold = 3;
+                        };
+                        livenessProbe = {
+                          httpGet = {
+                            path = "/transmission/web/";
+                            port = 9091;
+                          };
+                          initialDelaySeconds = 30;
+                          periodSeconds = 20;
+                          timeoutSeconds = 2;
+                          failureThreshold = 3;
+                        };
+                        volumeMounts = [
+                          {
+                            name = "config";
+                            mountPath = "/config";
+                          }
+                          {
+                            name = "watch";
+                            mountPath = "/watch";
+                          }
+                          {
+                            name = "downloads";
+                            mountPath = "/downloads";
+                          }
+                        ];
+                      }
+                    ];
+                    volumes = [
+                      {
+                        name = "config";
+                        persistentVolumeClaim.claimName = "transmission-config";
+                      }
+                      {
+                        name = "watch";
+                        persistentVolumeClaim.claimName = "transmission-watch";
+                      }
+                      {
+                        name = "downloads";
+                        persistentVolumeClaim.claimName = "downloads";
+                      }
+                    ];
+                    dnsConfig.options = [
+                      {
+                        name = "ndots";
+                        value = "0";
+                      }
+                    ];
+                  };
+                };
+              };
+            }
+            {
+              apiVersion = "v1";
+              kind = "Service";
+              metadata = {
+                name = "transmission-lb";
+                namespace = "media";
+                annotations = {
+                  "metallb.io/address-pool" = "default";
+                  "metallb.io/allow-shared-ip" = "media";
+                };
+              };
+              spec = {
+                type = "LoadBalancer";
+                loadBalancerIP = "192.168.1.202";
+                selector = {
+                  "app" = "transmission";
+                };
+                ports = [
+                  {
+                    name = "http";
+                    port = 9091;
+                    targetPort = 9091;
+                  }
+                  {
+                    name = "peer";
+                    port = 51413;
+                    targetPort = 51413;
+                    protocol = "TCP";
+                  }
+                  {
+                    name = "peer-udp";
+                    port = 51413;
+                    targetPort = 51413;
+                    protocol = "UDP";
+                  }
+                ];
+              };
+            }
           ];
-          autoDeployCharts.metallb = chart // {
-            targetNamespace = "metallb-system";
-            createNamespace = true;
-            values = {
-              controller.image = {
-                repository = controllerImage.imageName;
-                tag = controllerImage.imageTag;
-              };
-              speaker.image = {
-                repository = speakerImage.imageName;
-                tag = speakerImage.imageTag;
-              };
-            };
-            extraDeploy = [
-              {
-                apiVersion = "metallb.io/v1beta1";
-                kind = "IPAddressPool";
-                metadata = {
-                  name = "default";
-                  namespace = "metallb-system";
-                };
-                spec = {
-                  addresses = [ "192.168.1.200-192.168.1.210" ];
-                  autoAssign = true;
-                };
-              }
-              {
-                apiVersion = "metallb.io/v1beta1";
-                kind = "L2Advertisement";
-                metadata = {
-                  name = "default";
-                  namespace = "metallb-system";
-                };
-                spec = {
-                  ipAddressPools = [ "default" ];
-                };
-              }
-            ];
-          };
         };
       };
     };
