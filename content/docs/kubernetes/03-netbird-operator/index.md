@@ -18,23 +18,38 @@ Using the Netbird dashboard, a DNS zone, named "homelab" in this case, must be c
 ## Installation
 ### Helm
 We can use the official Helm chart to install the Netbird Operator:
-{{< codefile file="assets/code/nix-config/modules/server/netbird-operator/charts.nix" lang="nix" >}}
+{{<codefile
+  file="assets/code/nix-config/modules/server/netbird-operator/charts.nix"
+  type="nix"
+>}}
 
 ### Preloading the Operator and Router Images
 The images can be preloaded as usual with their corresponding helm values set:
-{{< codefile file="assets/code/nix-config/modules/server/netbird-operator/images.nix" lang="nix" >}}
+{{<codefile
+  file="assets/code/nix-config/modules/server/netbird-operator/images.nix"
+  type="nix"
+>}}
 
 ### Configuring the Network Router
 Using the *netbird.io* api we can deploy our network routers:
-{{< codefile file="assets/code/nix-config/modules/server/netbird-operator/router.nix" lang="nix" >}}
+{{<codefile
+  file="assets/code/nix-config/modules/server/netbird-operator/router.nix"
+  type="nix"
+>}}
 
 ### Adding the Netbird Secret
 Using sops-nix we can add a separate manifest to deploy the required Kubernetes secrets:
-{{< codefile file="assets/code/nix-config/modules/server/netbird-operator/secrets.nix" lang="nix" >}}
+{{<codefile
+  file="assets/code/nix-config/modules/server/netbird-operator/secrets.nix"
+  type="nix"
+>}}
 
 ## Exposing Services
 Once installed, we can deploy *NetworkResource* manifests to expose Kubernetes services:
-{{< codefile file="assets/code/nix-config/modules/server/immich/services.nix" lang="nix" >}}
+{{<codefile
+  file="assets/code/nix-config/modules/server/immich/services.nix"
+  type="nix"
+>}}
 
 ## Managing the Cluster Network in Netbird
 With our services deployed, we can manage the generate resources in the "homelab" network on the Netbird dashboard:
