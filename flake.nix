@@ -72,6 +72,7 @@
             cp -r --no-preserve=mode ${blowfish}/* themes/blowfish
             cp -r --no-preserve=mode ${nix-config}/* assets/code/nix-config
             hugo server
+            exit
           '';
         };
       });
