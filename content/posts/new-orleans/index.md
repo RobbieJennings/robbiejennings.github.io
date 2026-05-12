@@ -7,7 +7,7 @@ categories = ["Photography"]
 featureImage = "img/new-orleans.jpg"
 +++
 
-In December of 2025 I made my first ever trip to the US to visit my girlfriend's parents and see the city of Houston where she grew up. As part of this trip, we ventured out for a three-day trip to New Orleans, the birthblace of jazz and the city of Voodoo.
+In December of 2024 I made my first ever trip to the US to visit my girlfriend's parents and see the city of Houston where she grew up. As part of this trip, we ventured out for a three-day trip to New Orleans, the birthplace of jazz and the city of Voodoo.
 
 The day prior Nola was hit with tragedy as a terrorist attack took the lives of fifteen innocent people celebrating the new year. I remember a sense of unease and serious questioning as to whether or not it would be safe for us to go that morning. Upon our arrival however I was touched by the tenacity and solidarity shown by the people of the Big Easy.
 

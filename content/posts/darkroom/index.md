@@ -12,7 +12,7 @@ A 60"x120" tabletop with cheap workbench and DIY sliding shelves made from ikea 
 
 The next tier consists of a sliding "wet section" which contains three 8"x10" development trays colour coded for development (red), stop bath (white) and fixer (grey). A fourth tray used for washing test prints sits above the fixer tray for easy transfer with minimal risk for cross contamination. Larger prints can be made using the JOBO 2850 processing drum and a set of rollers.
 
-The third tier is a shelf for additional printing papers and easels of various sized along with a Patterson contact printer. Below is a larger shelf for drum, measuring cylinder and chemistry storage along with an ikea storage box for accessories such as a squeegees, scissors, gloves and film hanging clips.
+The third tier is a shelf for additional printing papers and easels of various sizes along with a Patterson contact printer. Below is a larger shelf for drums, measuring cylinders and chemistry storage along with an ikea storage box for accessories such as a squeegees, scissors, gloves and film hanging clips.
 
 All of this fits snugly in my garden shed taking up less than 1.5sqm of floor space and without the need for blacking out the whole room!
 
