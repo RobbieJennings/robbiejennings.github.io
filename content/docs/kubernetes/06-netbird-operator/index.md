@@ -3,8 +3,8 @@ showDate = false
 showAuthor = false
 title = 'Kubernetes: Netbird Operator'
 series = ["Kubernetes"]
-series_order = 3
-weight = 197
+series_order = 6
+weight = 194
 tags = ["Kubernetes"]
 categories = ["Development", "Homelab"]
 +++
@@ -15,7 +15,7 @@ To access the cluster from outside of the home network we can deploy the Netbird
 ## Prerequisites
 Using the Netbird dashboard, a DNS zone, named "homelab" in this case, must be creted along with a srevice user api key with admin permissions.
 
-## Installation
+## Deploying Netbird
 ### Helm
 We can use the official Helm chart to install the Netbird Operator:
 {{<codefile

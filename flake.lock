@@ -3,11 +3,11 @@
     "blowfish": {
       "flake": false,
       "locked": {
-        "lastModified": 1776118157,
-        "narHash": "sha256-Ke1uRYETXVq/htV5U11vJwuPeNdxWWWO5o+BJHrVorg=",
+        "lastModified": 1778711236,
+        "narHash": "sha256-mf00ZdWC9hZj+JOyeJcGFILXkYwjIQegLYc+ACSx1H0=",
         "owner": "nunocoracao",
         "repo": "blowfish",
-        "rev": "da8ca782aab44c54a61be25a71281348247c39f2",
+        "rev": "e9699d8c5da9a64a105eb8401fd2cf79c6015c6f",
         "type": "github"
       },
       "original": {
@@ -19,11 +19,11 @@
     "nix-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1778340217,
-        "narHash": "sha256-eTpWg2myUKvTR6PfHuu6MpqbG/lUMWQvD3qSeTLhxRk=",
+        "lastModified": 1778627724,
+        "narHash": "sha256-kwnO2a3oZQUEQVDuln+W4j5FpATJFzAVSYSA0+H36rk=",
         "owner": "robbiejennings",
         "repo": "nix-config",
-        "rev": "032d5a2af9b5bb318890fb6dca22c6a7e2fa2254",
+        "rev": "29f0bdad2fbe8da8c10d9d12a666ea6dd2bc9b9f",
         "type": "github"
       },
       "original": {
@@ -34,11 +34,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1777954456,
-        "narHash": "sha256-hGdgeU2Nk87RAuZyYjyDjFL6LK7dAZN5RE9+hrDTkDU=",
+        "lastModified": 1778443072,
+        "narHash": "sha256-zi7/fsqM/kFdNuED//4WOCUtezGtKKqRNORjMvfwjnA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "549bd84d6279f9852cae6225e372cc67fb91a4c1",
+        "rev": "da5ad661ba4e5ef59ba743f0d112cbc30e474f32",
         "type": "github"
       },
       "original": {

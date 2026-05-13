@@ -10,20 +10,15 @@ categories = ["Development", "Homelab"]
 +++
 
 ## Introduction
-This documentation follows on from my NixOS documentation and describes the creation of a single node k3s cluster using nix. A mixture of helm and raw manifests will be used but all will be defined in pure nix as part of my nix-config flake.
+This documentation follows on from my NixOS documentation and describes the creation of a single node k3s cluster using nix. A mixture of helm and raw manifests will be used but all will be defined in pure nix as part of my [nix-config](https://github.com/robbiejennings/nix-config) flake.
 
-## Features
-  - ⚖️ [MetalLB](https://metallb.io)
-  - 🗃️ [Longhorn](https://longhorn.io)
-  - 🛢️ [CloudnativePG](https://cloudnative-pg.io)
-  - ⛽ [Valkey](https://valkey.io)
-  - 🐦 [Netbird](https://netbird.io/)
-  - 🏠 [Homepage](https://gethomepage.dev)
-  - 📊 [Grafana](https://grafana.com)
-  - 🪣 [Forgejo](https://forgejo.org)
-  - ☁️ [Nextcloud](https://nextcloud.com)
-  - 📼 [Jellyfin](https://jellyfin.org)
-  - 🏴‍☠️ [Servarr](https://wiki.servarr.com)
+## Enabling k3s
+To begin using Kubernetes on NixOS we can enable the k3s service along with a token secret:
+{{<codefile
+  file="assets/code/nix-config/modules/server/k3s.nix"
+  type="nix"
+>}}
 
 ## Extra Reading
+[NixOS Documentation]({{< ref "docs/nixos/01-introduction/index.md" >}})\
 [Defining k3s in Pure Nix](https://github.com/rorosen/k3s-nix/tree/main)
