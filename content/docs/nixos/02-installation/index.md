@@ -20,7 +20,7 @@ sudo nix run --experimental-features "nix-command flakes" github:nix-community/d
 ```
 
 ### Install a NixOS system
-Once disko is finished formatting disks and initialising the required filesystems we can move onto the NixOS installation. Again, this is a simple one-line command where you will be asked for a secure root password. 
+Once Disko is finished formatting disks and initialising the required filesystems we can move onto the NixOS installation. Again, this is a simple one-line command where you will be asked for a secure root password. 
 
 ```bash
 # Install NixOS

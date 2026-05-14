@@ -11,6 +11,9 @@ categories = ["Development", "Homelab"]
 +++
 
 ## Adding Secrets
+>[!NOTE]
+>See [sops-nix documentation]({{< ref "docs/nixos/06-sops-nix/index.md" >}}) for more details.
+
 We can make use of sops-nix templates to deploy Kubernetes secrets which can then be referenced by Helm charts and other manifests. This should be done for all sensitive data such as API keys and passwords:
 {{<codefile
   file="assets/code/nix-config/modules/server/immich/secrets.nix"
