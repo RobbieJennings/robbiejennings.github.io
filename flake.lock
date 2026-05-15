@@ -19,11 +19,11 @@
     "nix-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1778627724,
-        "narHash": "sha256-kwnO2a3oZQUEQVDuln+W4j5FpATJFzAVSYSA0+H36rk=",
+        "lastModified": 1778878096,
+        "narHash": "sha256-+NaYUGX98cBIUzqIxvKjPgd/+QXcJJYNzvaN0eaT8n0=",
         "owner": "robbiejennings",
         "repo": "nix-config",
-        "rev": "29f0bdad2fbe8da8c10d9d12a666ea6dd2bc9b9f",
+        "rev": "6dbb940da5670810160cd897130d39389f492555",
         "type": "github"
       },
       "original": {
