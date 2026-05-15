@@ -2,5 +2,6 @@ assets/code/
 themes/
 public/
 result/
+result
 /resources/_gen/
 .hugo_build.lock
