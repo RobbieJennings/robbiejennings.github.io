@@ -43,7 +43,7 @@
 
         dockerImage = pkgs.${system}.dockerTools.buildImage {
           name = "blog";
-          tag = "latest";
+          tag = self.dirtyShortRev;
           copyToRoot = pkgs.${system}.buildEnv {
             name = "image-root";
             paths = [ self.packages.${system}.default pkgs.${system}.caddy ];
