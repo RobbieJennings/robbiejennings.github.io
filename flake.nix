@@ -34,8 +34,8 @@
           buildPhase = ''
             mkdir -p themes/blowfish
             mkdir -p assets/code/nix-config
-            cp -r --no-preserve=mode ${blowfish}/* themes/blowfish
-            cp -r --no-preserve=mode ${nix-config}/* assets/code/nix-config
+            cp -a --no-preserve=mode ${blowfish}/. themes/blowfish
+            cp -a --no-preserve=mode ${nix-config}/. assets/code/nix-config
             ${pkgs.${system}.hugo}/bin/hugo
           '';
           installPhase = "cp -r public $out";
@@ -69,8 +69,8 @@
             rm -rf assets/code/nix-config
             mkdir -p themes/blowfish
             mkdir -p assets/code/nix-config
-            cp -r --no-preserve=mode ${blowfish}/* themes/blowfish
-            cp -r --no-preserve=mode ${nix-config}/* assets/code/nix-config
+            cp -a --no-preserve=mode ${blowfish}/. themes/blowfish
+            cp -a --no-preserve=mode ${nix-config}/. assets/code/nix-config
             hugo server
             exit
           '';

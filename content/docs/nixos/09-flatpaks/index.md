@@ -10,4 +10,9 @@ tags = ["NixOS"]
 categories = ["Development", "Homelab"]
 +++
 
-## Introduction
+## Installing Flatpak applications
+Using the [nix-flatpak](https://github.com/gmodena/nix-flatpak) home-manager module we can install Flatpak applications declaratively. This ensures that including applications are installed upon each rebuild:
+{{<codefile
+  file="assets/code/nix-config/modules/users/web/firefox.nix"
+  type="nix"
+>}}

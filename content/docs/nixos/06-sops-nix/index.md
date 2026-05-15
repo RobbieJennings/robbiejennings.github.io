@@ -11,7 +11,7 @@ categories = ["Development", "Homelab"]
 +++
 
 ## Encrypting secrets
-Secrets such as API keys and passwords should never be stored in plain text. Instead, we can use sops-nix to import this sensitive data from encrypted files. This negates the need to omit certain files from public repositories and reduces the risk of leaks due to human error.
+Secrets such as API keys and passwords should never be stored in plain text. Instead, we can use [sops-nix](https://github.com/Mic92/sops-nix) to import this sensitive data from encrypted files. This negates the need to omit certain files from public repositories and reduces the risk of leaks due to human error.
 
 ## Prerequisites
 ### Generating age key

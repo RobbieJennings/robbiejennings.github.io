@@ -42,7 +42,7 @@ A single module can be defined for re-used nix and home-manager settings to redu
 >}}
 
 ## Defining a feature module
-Though modules are composable, each module file should handle a single repsonsibility. For example, a desktop module may contain many individual feature modules to cover the desktop environments, audio interfaces, etc...\
+Though modules are composable, each module file should handle a single repsonsibility. For example, a desktop module may contain many individual feature modules to cover the desktop environments, audio interfaces, etc...
 
 ### Single feature
 An "audio" module may look like:
