@@ -11,6 +11,9 @@ categories = ["Development", "Homelab"]
 +++
 
 ## Writing custom packages
+>[!NOTE]
+>We can use flake inputs for sources which don't have versioned download links. Their hashes our updated by running the *nix flake update* command.
+
 For software that is not included in the official Nix repository we can make use of Nix derivations to package our own applications:
 {{<codefile
   file="assets/code/nix-config/packages/vuescan.nix"
