@@ -28,7 +28,7 @@
       packages = forAllSystems (system: {
         default = pkgs.${system}.stdenv.mkDerivation {
           pname = "blog";
-          version = "0.1.0";
+          version = "0.1.1;
           src = ./.;
           dontConfigure = true;
           buildPhase = ''
